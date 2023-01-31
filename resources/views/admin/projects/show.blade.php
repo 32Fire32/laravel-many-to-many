@@ -28,7 +28,7 @@
             @if (count($project['technologies']) > 0)
                 <h6>Tecnologie utilizzate</h6>
                 @foreach ($project->technologies as $technology)
-                    <span>{{ $project->technology }} <span class="badge bg-secondary">New</span></span>
+                    <span class="badge bg-secondary">{{ $technology->name }}</span>
                 @endforeach
             @endif
         </div>
