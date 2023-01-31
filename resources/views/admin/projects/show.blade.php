@@ -24,6 +24,15 @@
                 Nessun tipo di progetto
             @endif
         </h4>
+        <div class="m-2">
+            @if (count($project['technologies']) > 0)
+                <h6>Tecnologie utilizzate</h6>
+                @foreach ($project->technologies as $technology)
+                    <span>{{ $project->technology }} <span class="badge bg-secondary">New</span></span>
+                @endforeach
+            @endif
+        </div>
+
 
         <a href="{{ route('admin.projects.index') }}"class="btn btn-primary">Torna alla lista dei progetti</a>
     @endsection
