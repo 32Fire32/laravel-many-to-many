@@ -33,7 +33,9 @@ class UpdateProjectRequest extends FormRequest
                 'project_logo_img' => 'nullable|image|max:2048',
                 'doc_project' => 'nullable|mimes:zip,txt,pdf|max:2048',
                 'no_image' => 'nullable',
-                'type_id' => 'nullable|exists:types,id'
+                'type_id' => 'nullable|exists:types,id',
+                'technologies' => 'nullable|exists:technologies,id'
+
 
 
         ];

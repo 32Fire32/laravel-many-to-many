@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use App\Models\Technology;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\Models\Type;
@@ -33,8 +34,9 @@ class ProjectController extends Controller
     public function create()
     {
         $types = Type::all();
+        $technologies = Technology::all();
 
-        return view('admin.projects.create', compact('types'));
+        return view('admin.projects.create', compact('types', 'technologies'));
 
     }
 
@@ -46,8 +48,7 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        
-        $data = $request->validated();    
+        $data = $request->validated();   
 
         $new_projects = new Project();
 
@@ -64,6 +65,9 @@ class ProjectController extends Controller
         }
 
         $new_projects->save();
+
+        // store degli id provenienti dal form sulla tabella pivot
+        $new_projects->technologies()->sync($data['technologies']);
 
         return redirect()->route('admin.projects.index')->with('message', "$new_projects->name_project creato con successo!");
     }
