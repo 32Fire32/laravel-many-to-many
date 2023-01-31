@@ -25,7 +25,7 @@
             @endif
         </h4>
         <div class="m-2">
-            @if (count($project['technologies']) > 0)
+            @if ($project->technologies->isNotEmpty())
                 <h6>Tecnologie utilizzate</h6>
                 @foreach ($project->technologies as $technology)
                     <span class="badge bg-secondary">{{ $technology->name }}</span>

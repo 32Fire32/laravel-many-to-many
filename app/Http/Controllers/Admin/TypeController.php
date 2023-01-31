@@ -52,7 +52,7 @@ class TypeController extends Controller
 
         $new_types->save();
 
-        return redirect()->route('admin.projects.index')->with('message', "La nuova tipologia '$new_types->name' creata con successo!");
+        return redirect()->route('admin.types.index')->with('message', "La nuova tipologia '$new_types->name' creata con successo!");
 
 
     }
@@ -112,7 +112,7 @@ class TypeController extends Controller
 
         $type->delete();
 
-        return redirect()->route('admin.types.index')->with('message', "La tipologia $old_title è stata eliminata con successo!");;
+        return redirect()->route('admin.types.index')->with('message', "La tipologia $old_title è stata eliminata con successo!");
 
     }
 }
