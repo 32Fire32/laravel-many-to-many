@@ -85,6 +85,29 @@
                 <div class="alert alert-danger">{{ $message }} </div>
             @enderror
 
+            <div class="mb-3">
+                <p>Tecnologie utilizzate</p>
+                @foreach ($technologies as $technology)
+                    <div class="form-check form-check-inline">
+                        @if ($errors->any())
+                            <input class="form-check-input" type="checkbox" id="{{ $technology->slug }}"
+                                value="{{ $technology->id }}"
+                                {{ in_array($technology->id, old('technologies', [])) ? 'checked' : '' }}
+                                name="technologies[]">
+                        @else
+                            <input class="form-check-input" type="checkbox" id="{{ $technology->slug }}"
+                                value="{{ $technology->id }}"
+                                {{ $project->technologies->contains($technology->id) ? 'checked' : '' }}
+                                name="technologies[]">
+                        @endif
+                        <label class="form-check-label" for="{{ $technology->slug }}">{{ $technology->name }}</label>
+                    </div>
+                @endforeach
+            </div>
+            @error('doc_project')
+                <div class="alert alert-danger">{{ $message }} </div>
+            @enderror
+
             <button type="submit" class="btn btn-primary">Modifica</button>
             <a href="{{ route('admin.projects.index') }}"class="btn btn-secondary">Torna alla lista dei progetti</a>
         </form>

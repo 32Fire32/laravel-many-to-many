@@ -67,7 +67,10 @@ class ProjectController extends Controller
         $new_projects->save();
 
         // store degli id provenienti dal form sulla tabella pivot
-        $new_projects->technologies()->sync($data['technologies']);
+        if (isset($data['technologies']))
+        {
+            $new_projects->technologies()->sync($data['technologies']);
+        }
 
         return redirect()->route('admin.projects.index')->with('message', "$new_projects->name_project creato con successo!");
     }
@@ -92,7 +95,8 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $types = Type::all();
-        return view('admin.projects.edit', compact('project', 'types'));
+        $technologies = Technology::all();
+        return view('admin.projects.edit', compact('project', 'types', 'technologies'));
 
     }
 
@@ -119,6 +123,11 @@ class ProjectController extends Controller
         if(isset($data['no_image']) && $project->project_logo_img){
             Storage::disk('public')->delete($project->project_logo_img);
             $project->project_logo_img = null;
+        }
+
+        if (isset($data['technologies']))
+        {
+            $project->technologies()->sync($data['technologies']);
         }
 
         $project->update($data);
