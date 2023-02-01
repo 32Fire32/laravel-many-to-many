@@ -28,7 +28,7 @@
                 </div>
             </div>
         @endif
-        <table class="table text-center">
+        <table class="table text-center table-striped">
             <thead>
                 <tr>
                     <th scope="col">#</th>

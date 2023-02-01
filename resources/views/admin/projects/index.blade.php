@@ -41,7 +41,7 @@
                 </div>
             </div>
         @endif
-        <table class="table text-center">
+        <table class="table table-striped text-center">
             <thead>
                 <tr>
                     <th scope="col">#</th>
