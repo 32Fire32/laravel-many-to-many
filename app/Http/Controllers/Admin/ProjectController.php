@@ -10,6 +10,8 @@ use App\Models\Technology;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\Models\Type;
+use Symfony\Component\HttpFoundation\Request;
+
 
 
 class ProjectController extends Controller
@@ -19,9 +21,22 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $projects = Project::all();
+        // $projects = Project::all();
+
+        $projects = Project::where([
+            ['name_project', '!=', Null],
+            [function($query) use ($request){
+                if(($term = $request->term)){
+                    $query->orWhere('name_project', 'LIKE', '%' . $term . '%')->get();
+                }
+            }]
+        ])
+        ->orderBy('id', 'desc')
+        ->paginate(10);
+        
+        return view('admin.projects.index', compact('projects'))->with('i', (request()->input('page',1)-1)*5);
         
         return view('admin.projects.index', compact('projects'));
     }

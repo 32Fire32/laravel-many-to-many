@@ -4,6 +4,20 @@
     <div class="container">
         <div class="d-flex align-items-center justify-content-between p-5">
             <h1>Lista Progetti:</h1>
+            <form action="{{ route('admin.projects.index') }}" role="search" class="d-flex">
+                <input class="form-control form-control-dark w-100" type="text" placeholder="Cerca il tuo progetto"
+                    aria-label="Search" id="term" name='term' />
+                <button class="btn btn-info" type="submit" title="Search projects">
+                    <span class="fas fa-search"></span>
+                </button>
+                <a href="{{ route('admin.projects.index') }}" class=" mt-1">
+                    <span class="input-group-btn">
+                        <button class="btn btn-warning" type="button" title="Refresh page">
+                            <span class="fas fa-sync-alt"></span>
+                        </button>
+                    </span>
+                </a>
+            </form>
             <a href="{{ route('admin.projects.create') }}" class="btn btn-warning" data-bs-toggle="popover"
                 title="Clicca qui per inserire un nuovo progetto" data-bs-trigger="hover">Nuovo</a>
         </div>
